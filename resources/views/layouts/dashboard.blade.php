@@ -6,7 +6,7 @@
     <title>@yield('title', 'Dashboard') - Lasafi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -20,23 +20,25 @@
             --dash-green:#0f9f6e;
             --dash-blue:#0b5ed7;
         }
-        body, button, input, select, textarea { font-family:'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; letter-spacing:normal; }
-        body { margin:0; background:#fff; color:#212529; font-size:16px; font-weight:400; line-height:24px; overflow-x:hidden; }
+        body, button, input, select, textarea { font-family:'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; letter-spacing:normal; }
+        body { margin:0; background:#f4f6fb; color:#212529; font-size:16px; font-weight:400; line-height:24px; overflow-x:hidden; }
         .dashboard-shell { min-height:100vh; display:grid; grid-template-columns:250px minmax(0,1fr); }
-        .dashboard-sidebar { background:#fff; border-right:1px solid #dbe4f0; padding:34px 18px 24px; height:100vh; overflow-y:auto; position:sticky; top:0; box-shadow:0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22); }
-        .dashboard-brand { display:flex; align-items:center; justify-content:center; gap:8px; background:transparent; border:0; border-radius:0; padding:8px 0 28px; min-height:auto; font-size:16px; line-height:24px; font-weight:400; color:#343a40; text-decoration:none; box-shadow:none; }
+        .dashboard-sidebar { background:linear-gradient(180deg,#f8fafc 0%,#ffffff 70%); border-right:1px solid #e2e8f0; padding:16px 10px 24px; height:100vh; overflow-y:auto; position:sticky; top:0; box-shadow:8px 0 30px rgba(15,23,42,.08); }
+        .dashboard-brand { display:flex; align-items:center; justify-content:center; gap:8px; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:12px 14px; min-height:auto; font-size:19.2px; line-height:24px; font-weight:600; color:#0f172a; text-decoration:none; box-shadow:0 12px 20px rgba(15,23,42,.08); margin:12px 10px 18px; }
         .dashboard-brand-mark { display:none; }
         .sidebar-section { margin-top:24px; }
-        .sidebar-heading { color:#94a3b8; font-size:.76rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; margin:0 0 8px 12px; }
-        .sidebar-link { display:grid; grid-template-columns:32px 1fr; align-items:center; gap:12px; min-height:54px; padding:10px 12px; color:#475569; text-decoration:none; font-size:16px; line-height:24px; font-weight:400; border-radius:12px; margin-bottom:3.2px; }
-        .sidebar-link:hover, .sidebar-link.active { background:#2563eb; color:#fff; box-shadow:none; }
-        .sidebar-icon { width:32px; height:32px; border-radius:10px; background:#e2e8f0; display:grid; place-items:center; color:#64748b; font-size:1rem; }
-        .sidebar-link.active .sidebar-icon, .sidebar-link:hover .sidebar-icon { background:rgba(255,255,255,.22); color:#fff; }
+        .sidebar-heading { color:#94a3b8; font-size:.7rem; font-weight:400; letter-spacing:.18em; text-transform:uppercase; margin:14px 12px 6px; }
+        .sidebar-link { display:grid; grid-template-columns:34px 1fr; align-items:center; gap:10px; min-height:54px; padding:10px 12px; color:#475569; text-decoration:none; font-size:16px; line-height:24px; font-weight:500; border-radius:12px; margin:4px 8px; transition:all .2s ease; }
+        .sidebar-link:hover { background:#f1f5f9; color:#0f172a; box-shadow:none; }
+        .sidebar-link.active { background:#2563eb; color:#fff; box-shadow:0 8px 18px rgba(37,99,235,.35); }
+        .sidebar-icon { width:34px; height:34px; border-radius:10px; background:#e2e8f0; display:grid; place-items:center; color:#64748b; font-size:.95rem; }
+        .sidebar-link:hover .sidebar-icon { background:#dbeafe; color:#2563eb; }
+        .sidebar-link.active .sidebar-icon { background:rgba(255,255,255,.22); color:#fff; }
         .dashboard-main { min-width:0; padding:0; background:#f4f6fb; overflow-x:hidden; }
-        .dashboard-topbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:18px; }
+        .dashboard-topbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin:20px 16px 18px; }
         .dashboard-title { margin:0 0 4px; font-size:28.8px; line-height:34.56px; font-weight:600; color:#0f172a; }
         .dashboard-subtitle { color:#6c757d; margin:0; font-size:16px; line-height:24px; }
-        .dashboard-content-card, .card { border:0; border-radius:4.8px; box-shadow:0 16px 48px rgba(0,0,0,.176); }
+        .dashboard-content-card, .card { border:1px solid #e2e8f0; border-radius:18px; box-shadow:0 18px 32px rgba(15,23,42,.08); }
         .metric { border-left:0; }
         .metric .card-body { min-height:78px; display:flex; flex-direction:column; justify-content:center; }
         .card-body, .form-control, .form-select, .btn, .table, .form-label { font-size:16px; }
@@ -46,6 +48,23 @@
         .btn-brand { background:var(--dash-green); color:#fff; border:0; }
         .btn-brand:hover { background:#0a8a5f; color:#fff; }
         .status { text-transform:capitalize; }
+        .adminlte-content-wrapper { background:#f4f6fb; min-height:100vh; padding-bottom:24px; }
+        .adminlte-content-header { padding:20px 16px 0; }
+        .adminlte-content-header h1 { font-size:1.8rem; font-weight:600; color:#0f172a; margin-bottom:.25rem; }
+        .adminlte-content { padding:0 16px 20px; }
+        .adminlte-content .container-fluid { width:100%; padding-right:7.5px; padding-left:7.5px; margin-right:auto; margin-left:auto; }
+        .adminlte-content .card-header { background:transparent; border-bottom:1px solid #e2e8f0; padding:.75rem 1.25rem; }
+        .adminlte-content .card-title { color:#0f172a; font-size:1.1rem; font-weight:600; margin:0; }
+        .adminlte-content .card-body { padding:1.25rem; }
+        .adminlte-content .card-footer { background:transparent; border-top:1px solid rgba(0,0,0,.125); padding:.75rem 1.25rem; }
+        .adminlte-content .card-primary { border-top:3px solid #007bff; }
+        .adminlte-content .form-group { margin-bottom:1rem; }
+        .adminlte-content label { display:inline-block; margin-bottom:.5rem; font-weight:400; }
+        .adminlte-content textarea { border-radius:8px; border:1px solid #ccc; padding:10px; font-size:14px; width:100%; box-shadow:0 1px 4px rgba(0,0,0,.1); }
+        .adminlte-content .form-control { border-radius:12px; border-color:#e2e8f0; font-size:16px; }
+        .adminlte-content .form-control:focus { border-color:#3b82f6; box-shadow:0 0 0 .2rem rgba(59,130,246,.15); }
+        .adminlte-content .btn:not(.btn-link) { border-radius:999px; font-weight:600; }
+        .breadcrumb { background:transparent; padding:0; margin-bottom:0; }
         @media (max-width: 991.98px) {
             .dashboard-shell { display:block; }
             .dashboard-sidebar { position:relative; width:100%; height:auto; max-height:none; }

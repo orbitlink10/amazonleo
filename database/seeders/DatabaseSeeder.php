@@ -26,13 +26,13 @@ class DatabaseSeeder extends Seeder
             ['name' => 'dispatcher', 'label' => 'Staff/Dispatcher'],
         ])->mapWithKeys(fn ($role) => [$role['name'] => Role::updateOrCreate(['name' => $role['name']], $role)]);
 
-        $admin = User::updateOrCreate(['email' => 'admin@lasafi.co.ke'], [
+        $admin = User::updateOrCreate(['email' => 'admin@demo.com'], [
             'role_id' => $roles['admin']->id,
             'name' => 'Lasafi Admin',
             'phone' => '0711000000',
             'county' => 'Nairobi',
             'location' => 'Westlands',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('admin123'),
         ]);
 
         User::updateOrCreate(['email' => 'dispatcher@lasafi.co.ke'], [
