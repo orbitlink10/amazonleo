@@ -4,11 +4,22 @@
 @section('full_bleed', true)
 @section('content')
 @php
-    $phone = '+254 704 991 492';
-    $phoneHref = 'tel:+254704991492';
-    $whatsappUrl = 'https://wa.me/254704991492?text=Hello%2C%20I%20want%20Amazon%20Leo%20Internet%20Kenya%20installation.';
-    $heroImage = 'https://satelliteinternetinstallers.com/wp-content/uploads/2026/05/rectangular-dish-installation-hero.png';
-    $travelImage = 'https://satelliteinternetinstallers.com/wp-content/uploads/2026/05/starlink-inspired-travel-hero.png';
+    $phone = $content['home_phone'];
+    $phoneHref = $content['home_phone_href'];
+    $whatsappUrl = $content['home_whatsapp_url'];
+    $heroImage = $content['home_hero_image_url'];
+    $travelImage = $content['home_feature_image_url'];
+    $kits = [
+        ['title' => $content['home_kit_title_1'], 'text' => $content['home_kit_text_1'], 'price' => $content['home_kit_price_1'], 'image' => $heroImage],
+        ['title' => $content['home_kit_title_2'], 'text' => $content['home_kit_text_2'], 'price' => $content['home_kit_price_2'], 'image' => $travelImage],
+        ['title' => $content['home_kit_title_3'], 'text' => $content['home_kit_text_3'], 'price' => $content['home_kit_price_3'], 'image' => $heroImage],
+    ];
+    $steps = [
+        ['title' => $content['home_how_title_1'], 'text' => $content['home_how_text_1']],
+        ['title' => $content['home_how_title_2'], 'text' => $content['home_how_text_2']],
+        ['title' => $content['home_how_title_3'], 'text' => $content['home_how_text_3']],
+        ['title' => $content['home_how_title_4'], 'text' => $content['home_how_text_4']],
+    ];
 @endphp
 
 <style>
@@ -137,7 +148,7 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
 <div class="amazonleo-page">
     <nav id="site-navigation" class="main-navigation starlink-navigation" role="navigation" aria-label="Primary menu">
         <div class="starlink-menu-bar">
-            <a class="starlink-brand" href="{{ route('home') }}" rel="home" aria-label="Amazon Leo home">AMAZON LEO</a>
+            <a class="starlink-brand" href="{{ route('home') }}" rel="home" aria-label="{{ $content['home_site_brand'] }} home">{{ $content['home_site_brand'] }}</a>
             <div class="starlink-primary-links" aria-label="Service menu">
                 <a class="starlink-menu-link starlink-menu-link--dropdown" href="#residential">Residential</a>
                 <a class="starlink-menu-link" href="#roam">Roam</a>
@@ -156,58 +167,46 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
         <section class="sii-hero">
             <div class="sii-hero-inner">
                 <p class="sii-kicker">Satellite internet installation specialists</p>
-                <h1>Very Fast<br>Amazon Leo Internet<br>with No Downtime<br>in Kenya.</h1>
-                <p class="sii-hero-subtitle">400Mbps for Ksh 6,500</p>
+                <h1>{!! nl2br(e($content['home_hero_title'])) !!}</h1>
+                <p class="sii-hero-subtitle">{{ $content['home_hero_description'] }}</p>
                 <div class="sii-price-block">
-                    <p class="sii-price-label">High-speed home and business internet</p>
-                    <div class="sii-price-row"><span class="sii-price">6,500</span><span class="sii-price-unit">KES/mo</span></div>
+                    <p class="sii-price-label">{{ $content['home_price_label'] }}</p>
+                    <div class="sii-price-row"><span class="sii-price">{{ $content['home_price_amount'] }}</span><span class="sii-price-unit">{{ $content['home_price_unit'] }}</span></div>
                 </div>
                 <div class="sii-actions">
-                    <a class="sii-btn sii-btn-primary" href="{{ route('bookings.create') }}">Request For Installation</a>
-                    <a class="sii-btn sii-btn-whatsapp" href="{{ $whatsappUrl }}" target="_blank" rel="noopener">Order on WhatsApp</a>
-                    <a class="sii-btn sii-btn-secondary" href="#kits">View Packages</a>
+                    <a class="sii-btn sii-btn-primary" href="{{ route('bookings.create') }}">{{ $content['home_primary_cta'] }}</a>
+                    <a class="sii-btn sii-btn-whatsapp" href="{{ $whatsappUrl }}" target="_blank" rel="noopener">{{ $content['home_whatsapp_cta'] }}</a>
+                    <a class="sii-btn sii-btn-secondary" href="#kits">{{ $content['home_provider_cta'] }}</a>
                 </div>
             </div>
         </section>
 
         <section id="kits" class="sii-kenya-kits-clean">
-            <h2>AMAZON LEO KENYA<br>KITS</h2>
+            <h2>{!! nl2br(e($content['home_services_title'])) !!}</h2>
             <div class="sii-kit-clean-grid">
-                <article class="sii-kit-clean">
-                    <div class="sii-kit-clean-img" style="background-image:url('{{ $heroImage }}')"></div>
-                    <h3>AMAZON LEO STANDARD KIT</h3>
-                    <p>High-speed Amazon Leo internet kit for homes, offices, lodges, farms, and remote sites in Kenya.</p>
-                    <p class="sii-kit-clean-price">KES 55,000.00</p>
-                    <a class="sii-kit-clean-btn" href="{{ route('bookings.create') }}">VIEW PRODUCT DETAILS</a>
-                </article>
-                <article class="sii-kit-clean">
-                    <div class="sii-kit-clean-img" style="background-image:url('{{ $travelImage }}')"></div>
-                    <h3>AMAZON LEO MINI KIT</h3>
-                    <p>Compact portable kit for travel, field work, events, and backup internet connections.</p>
-                    <p class="sii-kit-clean-price">KES 30,000.00</p>
-                    <a class="sii-kit-clean-btn" href="{{ route('bookings.create') }}">VIEW PRODUCT DETAILS</a>
-                </article>
-                <article class="sii-kit-clean">
-                    <div class="sii-kit-clean-img" style="background-image:url('{{ $heroImage }}');background-position:center right"></div>
-                    <h3>AMAZON LEO HIGH PERFORMANCE</h3>
-                    <p>Mounting, clean cabling, signal alignment, router setup, and handover support.</p>
-                    <p class="sii-kit-clean-price">KES 250,000.00</p>
-                    <a class="sii-kit-clean-btn" href="{{ route('bookings.create') }}">VIEW PRODUCT DETAILS</a>
-                </article>
+                @foreach($kits as $index => $kit)
+                    <article class="sii-kit-clean">
+                        <div class="sii-kit-clean-img" style="background-image:url('{{ $kit['image'] }}');{{ $index === 2 ? 'background-position:center right' : '' }}"></div>
+                        <h3>{{ $kit['title'] }}</h3>
+                        <p>{{ $kit['text'] }}</p>
+                        <p class="sii-kit-clean-price">{{ $kit['price'] }}</p>
+                        <a class="sii-kit-clean-btn" href="{{ route('bookings.create') }}">VIEW PRODUCT DETAILS</a>
+                    </article>
+                @endforeach
             </div>
         </section>
 
         <section id="roam" class="sii-starlink-feature">
             <div class="sii-starlink-copy">
-                <h2>Internet for travel,<br>road trips, and<br>commutes</h2>
-                <p>High-speed Amazon Leo Internet that moves with you, even in dead zones. In-motion use available in select areas.</p>
+                <h2>{!! nl2br(e($content['home_feature_title'])) !!}</h2>
+                <p>{{ $content['home_feature_text'] }}</p>
             </div>
         </section>
 
         <section id="residential" class="sii-section sii-what-we-do">
             <p class="sii-eyebrow">What we do</p>
-            <h2>End-to-end Amazon Leo installation for places fiber and mobile data do not serve well.</h2>
-            <p class="sii-lead">We plan the mounting position, align the satellite terminal, protect the cabling route, configure Wi-Fi, and test performance before handover.</p>
+            <h2>{{ $content['home_services_subtitle'] }}</h2>
+            <p class="sii-lead">{{ $content['home_why_text'] }}</p>
             <div class="sii-grid">
                 <article class="sii-card">
                     <h3>Residential installs</h3>
@@ -228,8 +227,8 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
             <section class="sii-section sii-split">
                 <div>
                     <p class="sii-eyebrow">Why use installers</p>
-                    <h2>Good signal starts with correct placement.</h2>
-                    <p class="sii-lead">Amazon Leo Internet is sensitive to obstruction, mounting angle, power stability, and cable routing. A professional install reduces downtime, weak Wi-Fi zones, and messy repairs later.</p>
+                    <h2>{{ $content['home_why_title'] }}</h2>
+                    <p class="sii-lead">{{ $content['home_why_text'] }}</p>
                     <div class="sii-checks">
                         <div class="sii-check"><strong>Clear line-of-sight planning</strong><br>We check for trees, roof edges, walls, and future obstruction risks before mounting.</div>
                         <div class="sii-check"><strong>Clean, weather-aware cabling</strong><br>Cable runs are planned to reduce water exposure, trip hazards, and unnecessary bends.</div>
@@ -253,22 +252,21 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
             <p class="sii-eyebrow">Process</p>
             <h2>A clear installation workflow.</h2>
             <div class="sii-steps">
-                <div class="sii-step"><h3>Assess</h3><p>We confirm location, roof access, power, coverage needs, and the best line of sight.</p></div>
-                <div class="sii-step"><h3>Install</h3><p>The terminal is mounted securely, aligned, and cabled neatly to the indoor network point.</p></div>
-                <div class="sii-step"><h3>Configure</h3><p>Router and Wi-Fi settings are configured for the property layout and user needs.</p></div>
-                <div class="sii-step"><h3>Test</h3><p>We verify connection quality, obstruction status, and basic device performance.</p></div>
+                @foreach($steps as $step)
+                    <div class="sii-step"><h3>{{ $step['title'] }}</h3><p>{{ $step['text'] }}</p></div>
+                @endforeach
             </div>
         </section>
 
         <section class="sii-cta">
             <div class="sii-cta-inner">
                 <div>
-                    <h2>Need Amazon Leo Internet installed?</h2>
-                    <p>Send your location and site type. We will help you plan the cleanest installation route.</p>
+                    <h2>{{ $content['home_areas_title'] }}</h2>
+                    <p>{{ $content['home_areas_text'] }}</p>
                 </div>
                 <div class="sii-actions">
-                    <a class="sii-btn sii-btn-primary" href="{{ route('bookings.create') }}">Start a Request</a>
-                    <a class="sii-btn sii-btn-whatsapp" href="{{ $whatsappUrl }}" target="_blank" rel="noopener">Order on WhatsApp</a>
+                    <a class="sii-btn sii-btn-primary" href="{{ route('bookings.create') }}">{{ $content['home_primary_cta'] }}</a>
+                    <a class="sii-btn sii-btn-whatsapp" href="{{ $whatsappUrl }}" target="_blank" rel="noopener">{{ $content['home_whatsapp_cta'] }}</a>
                 </div>
             </div>
         </section>
@@ -276,30 +274,12 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
         <section id="installation-support" class="sii-scroll-section">
             <div class="sii-scroll-inner">
                 <div class="sii-scroll-heading">
-                    <h2>Installation support for reliable satellite internet</h2>
+                    <h2>{{ $content['home_testimonials_title'] }}</h2>
                 </div>
                 <div class="sii-scroll-panel" aria-label="Scrollable installation support details">
                     <div class="sii-scroll-copy">
                         <article class="sii-scroll-card">
-                            <h1>Amazon Leo Internet Kenya: The Ultimate Guide to Satellite Internet in Kenya</h1>
-                            <h2>Introduction</h2>
-                            <p><strong>Amazon Leo Internet Kenya</strong> helps homes, businesses, schools, farms, construction sites, and remote communities get fast, reliable, low-latency internet where fiber and mobile networks struggle to reach.</p>
-                            <p>Whether you are working remotely, running a business, operating CCTV systems, attending online classes, or streaming high-definition content, Amazon Leo offers a dependable alternative to conventional internet providers.</p>
-                            <h2>What is Amazon Leo Internet Kenya?</h2>
-                            <p>Amazon Leo Internet Kenya is a satellite internet service that connects users through low-Earth orbit satellite technology. Unlike traditional internet services that rely on underground fiber cables or nearby cellular towers, the connection is delivered directly from satellites to your installed terminal.</p>
-                            <h2>Why Amazon Leo is Growing Rapidly</h2>
-                            <p>Demand continues to grow because many parts of Kenya still face slow internet speeds, frequent outages, poor rural coverage, expensive dedicated internet solutions, and network congestion during peak hours.</p>
-                            <h2>How Amazon Leo Internet Works</h2>
-                            <h3>1. Satellite terminal</h3>
-                            <p>The terminal is positioned with a clear view of the sky and communicates with satellites overhead.</p>
-                            <h3>2. Wi-Fi router</h3>
-                            <p>The router distributes internet throughout your home, office, lodge, school, farm, or field site.</p>
-                            <h3>3. Professional setup</h3>
-                            <p>Correct placement, stable mounting, clean cable routing, and router configuration help maximize performance and reduce downtime.</p>
-                            <h2>Who Should Use Amazon Leo Internet?</h2>
-                            <p>Amazon Leo is suitable for remote workers, businesses, schools, farmers, construction sites, hotels, lodges, and homes that need resilient internet in areas with limited terrestrial coverage.</p>
-                            <h2>Service Areas</h2>
-                            <p>Installations are available across Nairobi, Kiambu, Machakos, Kajiado, Nakuru, Mombasa, Kisumu, Eldoret, rural counties, and remote project locations across Kenya.</p>
+                            {!! $content['home_empty_testimonials'] !!}
                         </article>
                     </div>
                 </div>
@@ -308,7 +288,7 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
     </div>
 
     <footer class="amazonleo-footer">
-        <strong>Amazon Leo Internet Kenya</strong> | Satellite internet kits, installation, support, and connectivity planning across Kenya.
+        <strong>{{ $content['home_site_brand'] }}</strong> | {{ $content['home_footer_text'] }}
     </footer>
 </div>
 @endsection
