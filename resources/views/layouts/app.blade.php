@@ -76,6 +76,9 @@
     </style>
 </head>
 <body>
+@hasSection('full_bleed')
+    @yield('content')
+@else
 <nav class="navbar navbar-expand-lg bg-white sticky-top">
     <div class="container">
         <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ route('home') }}"><span class="brand-mark">LA</span> Lasafi</a>
@@ -171,5 +174,6 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @stack('scripts')
+@endif
 </body>
 </html>
