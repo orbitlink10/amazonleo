@@ -77,10 +77,39 @@ class HomeController extends Controller
             return 'https://via.placeholder.com/1800x900?text=Homepage';
         }
 
-        return Str::startsWith($image, ['http://', 'https://', '//'])
-            ? $image
-            : asset(Str::startsWith($image, ['/storage/', 'storage/'])
-                ? ltrim($image, '/')
-                : 'storage/'.ltrim($image, '/'));
+        $storagePath = $this->storagePath($image);
+
+        if ($storagePath !== null) {
+            return route('pages.image', ['path' => $storagePath]);
+        }
+
+        if (Str::startsWith($image, ['http://', 'https://', '//'])) {
+            return $image;
+        }
+
+        return route('pages.image', ['path' => ltrim($image, '/')]);
+    }
+
+    private function storagePath(string $image): ?string
+    {
+        if (Str::startsWith($image, ['/storage/', 'storage/'])) {
+            return Str::after(ltrim($image, '/'), 'storage/');
+        }
+
+        $path = parse_url($image, PHP_URL_PATH);
+
+        if (! is_string($path) || ! Str::startsWith($path, '/storage/')) {
+            return null;
+        }
+
+        $host = parse_url($image, PHP_URL_HOST);
+        $appHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+        $requestHost = request()->getHost();
+
+        if ($host && in_array($host, array_filter([$appHost, $requestHost]), true)) {
+            return Str::after(ltrim($path, '/'), 'storage/');
+        }
+
+        return null;
     }
 }

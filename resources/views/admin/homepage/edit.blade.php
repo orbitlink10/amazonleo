@@ -11,19 +11,28 @@
             return 'https://via.placeholder.com/1280x720?text=Homepage+Image';
         }
 
+        $path = parse_url($image, PHP_URL_PATH);
+        $host = parse_url($image, PHP_URL_HOST);
+        $appHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+        $requestHost = request()->getHost();
+
+        if (is_string($path) && str_starts_with($path, '/storage/') && $host && in_array($host, array_filter([$appHost, $requestHost]), true)) {
+            return route('pages.image', ['path' => str_replace('storage/', '', ltrim($path, '/'))]);
+        }
+
         if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://') || str_starts_with($image, '//')) {
             return $image;
         }
 
         if (str_starts_with($image, '/storage/')) {
-            return asset(ltrim($image, '/'));
+            return route('pages.image', ['path' => str_replace('storage/', '', ltrim($image, '/'))]);
         }
 
         if (str_starts_with($image, 'storage/')) {
-            return asset($image);
+            return route('pages.image', ['path' => str_replace('storage/', '', $image)]);
         }
 
-        return asset('storage/'.ltrim($image, '/'));
+        return route('pages.image', ['path' => ltrim($image, '/')]);
     };
 
     $currentHeroImage = $content['home_hero_image'];
