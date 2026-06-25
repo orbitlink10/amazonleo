@@ -92,7 +92,8 @@
                                 <div class="form-group">
                                     <label for="home_hero_image">Hero Image (1280 x 720)</label>
                                     <input type="file" class="form-control" name="home_hero_image" id="home_hero_image" accept="image/*">
-                                    <input type="text" class="form-control mt-2" name="home_hero_image_url" value="{{ old('home_hero_image_url', str_starts_with($content['home_hero_image'], 'http') ? $content['home_hero_image'] : '') }}" placeholder="Or paste an image URL">
+                                    <input type="text" class="form-control mt-2" name="home_hero_image_url" value="{{ old('home_hero_image_url', $content['home_hero_image']) }}" placeholder="Or paste an image URL">
+                                    <small class="text-muted">Current value: {{ $content['home_hero_image'] ?: 'No image saved yet' }}</small>
                                     <img src="{{ $currentHeroImageUrl }}" alt="Current hero image" class="homepage-content-image">
                                 </div>
 
@@ -164,7 +165,8 @@
                                 <div class="form-group">
                                     <label for="home_feature_image">Feature Image</label>
                                     <input type="file" class="form-control" name="home_feature_image" id="home_feature_image" accept="image/*">
-                                    <input type="text" class="form-control mt-2" name="home_feature_image_url" value="{{ old('home_feature_image_url', str_starts_with($content['home_feature_image'], 'http') ? $content['home_feature_image'] : '') }}" placeholder="Or paste an image URL">
+                                    <input type="text" class="form-control mt-2" name="home_feature_image_url" value="{{ old('home_feature_image_url', $content['home_feature_image']) }}" placeholder="Or paste an image URL">
+                                    <small class="text-muted">Current value: {{ $content['home_feature_image'] ?: 'No image saved yet' }}</small>
                                     <img src="{{ $currentFeatureImageUrl }}" alt="Current feature image" class="homepage-content-image">
                                 </div>
 

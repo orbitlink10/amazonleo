@@ -54,6 +54,12 @@ class HomeController extends Controller
         ];
 
         $content = collect($defaults)->mapWithKeys(fn ($default, $key) => [$key => Setting::valueFor($key, $default)]);
+        $content['home_hero_image'] = trim((string) $content['home_hero_image']) !== ''
+            ? $content['home_hero_image']
+            : $defaults['home_hero_image'];
+        $content['home_feature_image'] = trim((string) $content['home_feature_image']) !== ''
+            ? $content['home_feature_image']
+            : $defaults['home_feature_image'];
         $content['home_hero_image_url'] = $this->imageUrl($content['home_hero_image']);
         $content['home_feature_image_url'] = $this->imageUrl($content['home_feature_image']);
         $content['home_phone_href'] = 'tel:'.preg_replace('/\D+/', '', (string) $content['home_phone']);

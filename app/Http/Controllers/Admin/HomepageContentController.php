@@ -57,6 +57,12 @@ class HomepageContentController extends Controller
         $content = collect($this->fields)->mapWithKeys(fn ($default, $key) => [
             $key => Setting::valueFor($key, $default),
         ]);
+        $content['home_hero_image'] = trim((string) $content['home_hero_image']) !== ''
+            ? $content['home_hero_image']
+            : $this->fields['home_hero_image'];
+        $content['home_feature_image'] = trim((string) $content['home_feature_image']) !== ''
+            ? $content['home_feature_image']
+            : $this->fields['home_feature_image'];
 
         return view('admin.homepage.edit', ['content' => $content]);
     }
