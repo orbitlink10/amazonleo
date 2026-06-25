@@ -107,6 +107,10 @@
                     <span class="sidebar-icon"><i class="bi bi-tools"></i></span>
                     <span>Services</span>
                 </a>
+                <a class="sidebar-link {{ request()->routeIs('admin.menu.*') ? 'active' : '' }}" href="{{ route('admin.menu.edit') }}">
+                    <span class="sidebar-icon"><i class="bi bi-list"></i></span>
+                    <span>Menu</span>
+                </a>
                 <a class="sidebar-link" href="{{ route('home') }}#services">
                     <span class="sidebar-icon"><i class="bi bi-grid-3x3-gap"></i></span>
                     <span>Categories</span>

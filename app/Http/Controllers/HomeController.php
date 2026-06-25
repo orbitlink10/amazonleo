@@ -63,10 +63,34 @@ class HomeController extends Controller
         $content['home_hero_image_url'] = $this->imageUrl($content['home_hero_image']);
         $content['home_feature_image_url'] = $this->imageUrl($content['home_feature_image']);
         $content['home_phone_href'] = 'tel:'.preg_replace('/\D+/', '', (string) $content['home_phone']);
+        $content['home_primary_menu'] = $this->menuItems('home_primary_menu', [
+            ['label' => 'Residential', 'url' => '#residential', 'has_dropdown' => true],
+            ['label' => 'Roam', 'url' => '#roam', 'has_dropdown' => false],
+            ['label' => 'Shop', 'url' => '#kits', 'has_dropdown' => true],
+        ]);
+        $content['home_audience_menu'] = $this->menuItems('home_audience_menu', [
+            ['label' => 'Personal', 'url' => '#personal', 'is_active' => true],
+            ['label' => 'Business', 'url' => '#business', 'is_active' => false],
+        ]);
+        $content['home_mobile_menu_url'] = Setting::valueFor('home_mobile_menu_url', '#installation-support') ?: '#installation-support';
 
         return view('home', [
             'content' => $content,
         ]);
+    }
+
+    private function menuItems(string $key, array $defaults): array
+    {
+        $items = json_decode((string) Setting::valueFor($key, ''), true);
+
+        if (! is_array($items) || $items === []) {
+            return $defaults;
+        }
+
+        return collect($items)
+            ->filter(fn ($item) => is_array($item) && trim((string) ($item['label'] ?? '')) !== '')
+            ->values()
+            ->all();
     }
 
     private function imageUrl(?string $image): string

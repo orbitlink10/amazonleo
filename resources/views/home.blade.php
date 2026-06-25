@@ -150,16 +150,17 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
         <div class="starlink-menu-bar">
             <a class="starlink-brand" href="{{ route('home') }}" rel="home" aria-label="{{ $content['home_site_brand'] }} home">{{ $content['home_site_brand'] }}</a>
             <div class="starlink-primary-links" aria-label="Service menu">
-                <a class="starlink-menu-link starlink-menu-link--dropdown" href="#residential">Residential</a>
-                <a class="starlink-menu-link" href="#roam">Roam</a>
-                <a class="starlink-menu-link starlink-menu-link--dropdown" href="#kits">Shop</a>
+                @foreach($content['home_primary_menu'] as $item)
+                    <a class="starlink-menu-link {{ ! empty($item['has_dropdown']) ? 'starlink-menu-link--dropdown' : '' }}" href="{{ $item['url'] ?? '#' }}">{{ $item['label'] }}</a>
+                @endforeach
             </div>
             <a class="starlink-call" href="{{ $phoneHref }}">Call <strong>{{ $phone }}</strong></a>
             <div class="starlink-audience-toggle" aria-label="Audience selector">
-                <a class="starlink-audience-link is-active" href="#personal">Personal</a>
-                <a class="starlink-audience-link" href="#business">Business</a>
+                @foreach($content['home_audience_menu'] as $item)
+                    <a class="starlink-audience-link {{ ! empty($item['is_active']) ? 'is-active' : '' }}" href="{{ $item['url'] ?? '#' }}">{{ $item['label'] }}</a>
+                @endforeach
             </div>
-            <a class="starlink-menu-icon" href="#installation-support" title="Menu" aria-label="Open menu"><span></span><span></span><span></span></a>
+            <a class="starlink-menu-icon" href="{{ $content['home_mobile_menu_url'] }}" title="Menu" aria-label="Open menu"><span></span><span></span><span></span></a>
         </div>
     </nav>
 

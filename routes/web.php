@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Admin\HomepageContentController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\AssignmentController;
@@ -47,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin,dispatcher')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('services', ServiceController::class)->except(['show']);
         Route::resource('providers', ProviderController::class)->except(['show']);
+        Route::get('/menu', [MenuController::class, 'edit'])->name('menu.edit');
+        Route::put('/menu', [MenuController::class, 'update'])->name('menu.update');
         Route::get('/homepage-content', [HomepageContentController::class, 'edit'])->name('homepage.edit');
         Route::put('/homepage-content', [HomepageContentController::class, 'update'])->name('homepage.update');
         Route::get('/bookings/{booking}/assign', [AssignmentController::class, 'edit'])->name('assignments.edit');
