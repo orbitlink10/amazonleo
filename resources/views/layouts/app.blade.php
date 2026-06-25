@@ -44,26 +44,26 @@
         @media (max-width: 1199.98px) { .kingdom-arrow { display:none; } .kingdom-service-card { min-height:275px; } }
         .metric { border-left:4px solid var(--slk-green); }
         .status { text-transform:capitalize; }
-        .site-footer { margin-top:56px; color:#fff; font-family:'Trebuchet MS', 'Segoe UI', Arial, sans-serif; font-size:12px; line-height:18px; }
+        .site-footer { margin-top:56px; color:#fff; font-family:'Trebuchet MS', 'Segoe UI', Arial, sans-serif; font-size:16px; line-height:24px; }
         .footer-main { position:relative; overflow:hidden; background:linear-gradient(rgba(0,0,0,.82), rgba(0,0,0,.82)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80') center/cover; padding:34px 0 28px; }
-        .footer-title { margin:0 0 16px; color:#fff; font-size:16px; line-height:22px; font-weight:700; }
+        .footer-title { margin:0 0 16px; color:#fff; font-size:22px; line-height:30px; font-weight:700; }
         .footer-brand { display:flex; align-items:center; gap:8px; margin-bottom:16px; color:#fff; text-decoration:none; }
         .footer-brand .brand-mark { width:38px; height:38px; border-radius:10px; font-size:16px; }
-        .footer-brand strong { font-size:18px; line-height:24px; }
+        .footer-brand strong { font-size:24px; line-height:32px; }
         .footer-contact { display:grid; gap:8px; margin:0; padding:0; list-style:none; }
-        .footer-contact li { display:flex; align-items:flex-start; gap:8px; color:#fff; font-size:12px; line-height:18px; }
+        .footer-contact li { display:flex; align-items:flex-start; gap:8px; color:#fff; font-size:16px; line-height:24px; }
         .footer-contact i, .footer-services i, .footer-address i { color:#ff8800; flex:0 0 auto; margin-top:3px; }
         .footer-services { columns:2; column-gap:36px; margin:0 0 18px; padding:0; list-style:none; }
-        .footer-services li { break-inside:avoid; display:flex; gap:8px; margin:0 0 8px; color:#fff; font-size:12px; line-height:18px; }
+        .footer-services li { break-inside:avoid; display:flex; gap:8px; margin:0 0 10px; color:#fff; font-size:16px; line-height:24px; }
         .footer-services a { color:#fff; text-decoration:none; }
         .footer-services a:hover { color:#ffad3d; }
-        .footer-address { display:flex; gap:8px; color:#fff; font-size:12px; line-height:18px; }
+        .footer-address { display:flex; gap:8px; color:#fff; font-size:16px; line-height:24px; }
         .footer-social { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:32px; }
         .footer-social a { width:30px; height:30px; border-radius:6px; display:grid; place-items:center; background:#ff8800; color:#fff; font-size:16px; text-decoration:none; }
         .footer-newsletter { display:flex; width:100%; max-width:360px; }
-        .footer-newsletter input { min-width:0; flex:1; height:34px; border:1px solid #cfd4dc; border-radius:6px 0 0 6px; padding:6px 10px; color:#4b5563; font-size:12px; line-height:18px; }
-        .footer-newsletter button { height:34px; border:0; border-radius:0 6px 6px 0; padding:6px 10px; background:#ff8800; color:#fff; font-size:12px; line-height:18px; }
-        .footer-copy { padding-top:18px; color:#d7d7d7; font-size:11px; line-height:16px; }
+        .footer-newsletter input { min-width:0; flex:1; height:42px; border:1px solid #cfd4dc; border-radius:6px 0 0 6px; padding:8px 14px; color:#4b5563; font-size:16px; line-height:24px; }
+        .footer-newsletter button { height:42px; border:0; border-radius:0 6px 6px 0; padding:8px 14px; background:#ff8800; color:#fff; font-size:16px; line-height:24px; }
+        .footer-copy { padding-top:18px; color:#d7d7d7; font-size:15px; line-height:22px; }
         .page-starlink-navigation { position:sticky; top:0; z-index:30; background:#fff; box-shadow:0 8px 30px rgba(16,24,40,.08); }
         .starlink-menu-bar{display:grid;grid-template-columns:auto auto 1fr auto auto;align-items:center;gap:34px;min-height:88px;padding:0 40px;color:#334155;font-family:Arial,Helvetica,sans-serif}
         .starlink-brand,.starlink-menu-link,.starlink-call,.starlink-audience-link,.starlink-menu-icon{color:#334155;text-decoration:none}
