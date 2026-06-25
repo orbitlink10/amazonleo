@@ -6,21 +6,26 @@
     @hasSection('meta_description')
         <meta name="description" content="@yield('meta_description')">
     @endif
-    <title>@yield('title', 'Lasafi')</title>
+    <title>@yield('title', 'Amazon LEO Internet')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        :root { --slk-green:#0f9f6e; --slk-blue:#0b5ed7; --slk-ink:#123; --slk-soft:#eef8f4; }
-        body { background:#f6f9fb; color:var(--slk-ink); font-size:1rem; }
-        .navbar { box-shadow:0 8px 30px rgba(16,24,40,.08); }
-        .navbar .nav-link { color:#334155; font-size:1rem; font-weight:600; }
+        :root { --slk-green:#ffffff; --slk-blue:#5b6474; --slk-ink:#f8fafc; --slk-soft:#0b121a; --leo-bg:#05070b; --leo-panel:#07111a; --leo-muted:#cbd5e1; }
+        body { background:var(--leo-bg); color:var(--slk-ink); font-family:Arial, Helvetica, sans-serif; font-size:1rem; }
+        .navbar { background:#05070b!important; box-shadow:none; border-bottom:1px solid rgba(255,255,255,.12); }
+        .navbar .nav-link { color:rgba(255,255,255,.86); font-size:1rem; font-weight:700; }
         .navbar .nav-link:hover,
-        .navbar .nav-link.active { color:var(--slk-green); }
-        .brand-mark { width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,var(--slk-green),var(--slk-blue)); display:inline-grid; place-items:center; color:#fff; font-weight:800; }
-        .btn-brand { background:var(--slk-green); color:#fff; border:0; }
-        .btn-brand:hover { background:#0a8a5f; color:#fff; }
-        .text-brand { color:var(--slk-green); }
-        .hero { background:linear-gradient(120deg,rgba(8,91,66,.92),rgba(9,75,151,.88)), var(--hero-image) center/cover; color:#fff; }
+        .navbar .nav-link.active { color:#fff; }
+        .navbar-brand { color:#fff!important; font-family:Arial, Helvetica, sans-serif; letter-spacing:6px; text-transform:uppercase; }
+        .navbar-toggler { border-color:rgba(255,255,255,.45); }
+        .navbar-toggler-icon { filter:invert(1); }
+        .brand-mark { display:none; }
+        .btn-brand { background:#fff; color:#111; border:0; font-weight:700; }
+        .btn-brand:hover { background:#dfe5ee; color:#111; }
+        .btn-outline-secondary { color:#fff; border-color:rgba(255,255,255,.45); }
+        .btn-outline-secondary:hover { background:#fff; color:#111; border-color:#fff; }
+        .text-brand { color:#fff; }
+        .hero { background:linear-gradient(120deg,rgba(5,7,11,.86),rgba(7,17,26,.68)), var(--hero-image) center/cover; color:#fff; }
         .hero h1 { font-size:clamp(2.35rem, 4vw, 3.75rem); }
         .hero-video { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28); border-radius:14px; padding:10px; backdrop-filter:blur(4px); }
         .lead { font-size:1.16rem; }
@@ -44,25 +49,25 @@
         @media (max-width: 1199.98px) { .kingdom-arrow { display:none; } .kingdom-service-card { min-height:275px; } }
         .metric { border-left:4px solid var(--slk-green); }
         .status { text-transform:capitalize; }
-        .site-footer { margin-top:56px; color:#fff; font-family:'Trebuchet MS', 'Segoe UI', Arial, sans-serif; font-size:12px; line-height:18px; }
-        .footer-main { position:relative; overflow:hidden; background:linear-gradient(rgba(0,0,0,.82), rgba(0,0,0,.82)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80') center/cover; padding:34px 0 28px; }
+        .site-footer { margin-top:0; color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; }
+        .footer-main { position:relative; overflow:hidden; background:linear-gradient(rgba(5,7,11,.9), rgba(5,7,11,.9)), url('https://satelliteinternetinstallers.com/wp-content/uploads/2026/05/rectangular-dish-installation-hero.png') center/cover; padding:34px 0 28px; border-top:1px solid rgba(255,255,255,.12); }
         .footer-title { margin:0 0 16px; color:#fff; font-size:16px; line-height:22px; font-weight:700; }
         .footer-brand { display:flex; align-items:center; gap:8px; margin-bottom:16px; color:#fff; text-decoration:none; }
         .footer-brand .brand-mark { width:38px; height:38px; border-radius:10px; font-size:16px; }
         .footer-brand strong { font-size:18px; line-height:24px; }
         .footer-contact { display:grid; gap:8px; margin:0; padding:0; list-style:none; }
         .footer-contact li { display:flex; align-items:flex-start; gap:8px; color:#fff; font-size:12px; line-height:18px; }
-        .footer-contact i, .footer-services i, .footer-address i { color:#ff8800; flex:0 0 auto; margin-top:3px; }
+        .footer-contact i, .footer-services i, .footer-address i { color:#cbd5e1; flex:0 0 auto; margin-top:3px; }
         .footer-services { columns:2; column-gap:36px; margin:0 0 18px; padding:0; list-style:none; }
         .footer-services li { break-inside:avoid; display:flex; gap:8px; margin:0 0 8px; color:#fff; font-size:12px; line-height:18px; }
         .footer-services a { color:#fff; text-decoration:none; }
-        .footer-services a:hover { color:#ffad3d; }
+        .footer-services a:hover { color:#cbd5e1; }
         .footer-address { display:flex; gap:8px; color:#fff; font-size:12px; line-height:18px; }
         .footer-social { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:32px; }
-        .footer-social a { width:30px; height:30px; border-radius:6px; display:grid; place-items:center; background:#ff8800; color:#fff; font-size:16px; text-decoration:none; }
+        .footer-social a { width:30px; height:30px; border-radius:6px; display:grid; place-items:center; background:#5b6474; color:#fff; font-size:16px; text-decoration:none; }
         .footer-newsletter { display:flex; width:100%; max-width:360px; }
         .footer-newsletter input { min-width:0; flex:1; height:34px; border:1px solid #cfd4dc; border-radius:6px 0 0 6px; padding:6px 10px; color:#4b5563; font-size:12px; line-height:18px; }
-        .footer-newsletter button { height:34px; border:0; border-radius:0 6px 6px 0; padding:6px 10px; background:#ff8800; color:#fff; font-size:12px; line-height:18px; }
+        .footer-newsletter button { height:34px; border:0; border-radius:0 6px 6px 0; padding:6px 10px; background:#fff; color:#111; font-size:12px; line-height:18px; font-weight:700; }
         .footer-copy { padding-top:18px; color:#d7d7d7; font-size:11px; line-height:16px; }
         @media (max-width: 991.98px) {
             .footer-services { columns:1; }
@@ -79,16 +84,16 @@
 @hasSection('full_bleed')
     @yield('content')
 @else
-<nav class="navbar navbar-expand-lg bg-white sticky-top">
+<nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ route('home') }}"><span class="brand-mark">LA</span> Lasafi</a>
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ route('home') }}"><span class="brand-mark">LA</span> Amazon LEO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
         <div id="nav" class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('pages.preview', 'services') }}">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('pages.preview', 'how-it-works') }}">How It Works</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('pages.preview', 'why-lasafi') }}">Why Lasafi</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('pages.preview', 'why-lasafi') }}">Why Amazon LEO</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#service-areas">Areas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#testimonials">Testimonials</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('bookings.create') }}">Book</a></li>
@@ -128,7 +133,7 @@
             <div class="row g-5">
                 <div class="col-lg-3">
                     <h2 class="footer-title">CONTACT US</h2>
-                    <a class="footer-brand" href="{{ route('home') }}"><span class="brand-mark">LA</span><strong>Lasafi</strong></a>
+                    <a class="footer-brand" href="{{ route('home') }}"><span class="brand-mark">LA</span><strong>Amazon LEO</strong></a>
                     <ul class="footer-contact">
                         <li><i class="bi bi-telephone-fill"></i><span>+254 711 000 000</span></li>
                         <li><i class="bi bi-envelope-fill"></i><span>support@lasafi.co.ke</span></li>
@@ -168,7 +173,7 @@
                     </form>
                 </div>
             </div>
-            <div class="footer-copy">© {{ date('Y') }} Lasafi. Cleaning, movers, repairs, networking, CCTV and office maintenance.</div>
+            <div class="footer-copy">© {{ date('Y') }} Amazon LEO Internet. Satellite internet kits, installation, support, and connectivity planning across Kenya.</div>
         </div>
     </section>
 </footer>
