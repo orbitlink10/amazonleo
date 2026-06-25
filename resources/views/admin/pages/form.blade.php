@@ -124,8 +124,9 @@
         tinymce.init({
             selector: '#description',
             menubar: 'file edit view insert format tools table',
-            plugins: 'link image media table code fullscreen lists',
-            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image media | code fullscreen',
+            plugins: 'link image media table code fullscreen lists advlist autolink',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code fullscreen',
+            block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4',
             height: 430,
             branding: false,
             promotion: false,
