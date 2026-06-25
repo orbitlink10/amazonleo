@@ -216,8 +216,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="home_empty_testimonials">Long Homepage Content (HTML allowed)</label>
-                                    <textarea id="home_empty_testimonials" name="home_empty_testimonials" rows="14" required>{{ old('home_empty_testimonials', $content['home_empty_testimonials']) }}</textarea>
+                                    <label for="home_empty_testimonials">Long Homepage Content</label>
+                                    <textarea id="home_empty_testimonials" class="homepage-rich-editor" name="home_empty_testimonials" rows="18" required>{{ old('home_empty_testimonials', $content['home_empty_testimonials']) }}</textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -261,5 +261,43 @@
         padding: 16px;
         background: #f8fafc;
     }
+    .tox-tinymce {
+        border-color: #e2e8f0 !important;
+        border-radius: 12px !important;
+    }
 </style>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        tinymce.init({
+            selector: '#home_empty_testimonials',
+            height: 620,
+            menubar: 'file edit view insert format tools table',
+            plugins: 'advlist autolink charmap code fullscreen image link lists media preview table visualblocks wordcount',
+            toolbar: [
+                'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify',
+                'bullist numlist outdent indent | link image media | table | code fullscreen'
+            ].join(' | '),
+            block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4',
+            image_title: true,
+            image_advtab: true,
+            media_live_embeds: true,
+            convert_urls: false,
+            relative_urls: false,
+            remove_script_host: false,
+            extended_valid_elements: 'iframe[src|width|height|name|align|class|style|frameborder|allow|allowfullscreen|loading|referrerpolicy],video[*],source[*],img[*]',
+            valid_children: '+body[style|iframe|video]',
+            content_style: [
+                'body{font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.65;color:#17202a;padding:20px;}',
+                'h1{font-size:34px;line-height:1.15;margin:0 0 20px;}',
+                'h2{font-size:28px;line-height:1.2;margin:28px 0 12px;}',
+                'h3{font-size:22px;line-height:1.25;margin:22px 0 10px;}',
+                'p{margin:0 0 16px;}',
+                'img,video,iframe{max-width:100%;}',
+                'table{border-collapse:collapse;width:100%;}',
+                'td,th{border:1px solid #dbe3ea;padding:8px;}'
+            ].join('')
+        });
+    });
+</script>
 @endsection

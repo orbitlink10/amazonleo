@@ -101,7 +101,7 @@ class HomepageContentController extends Controller
             'home_areas_title' => ['required', 'string', 'max:120'],
             'home_areas_text' => ['required', 'string', 'max:500'],
             'home_testimonials_title' => ['required', 'string', 'max:120'],
-            'home_empty_testimonials' => ['required', 'string', 'max:20000'],
+            'home_empty_testimonials' => ['required', 'string', 'max:100000'],
             'home_footer_text' => ['required', 'string', 'max:255'],
             'home_hero_image' => ['nullable', 'image', 'max:4096'],
             'home_hero_image_url' => ['nullable', 'string', 'max:500'],
