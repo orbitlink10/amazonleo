@@ -266,11 +266,14 @@
         border-radius: 12px !important;
     }
 </style>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         tinymce.init({
             selector: '#home_empty_testimonials',
+            license_key: 'gpl',
+            base_url: 'https://cdn.jsdelivr.net/npm/tinymce@7',
+            suffix: '.min',
             height: 620,
             menubar: 'file edit view insert format tools table',
             plugins: 'advlist autolink charmap code fullscreen image link lists media preview table visualblocks wordcount',
