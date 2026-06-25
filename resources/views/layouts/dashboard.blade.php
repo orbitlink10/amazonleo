@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Dashboard') - Lasafi</title>
+    <title>@yield('title', 'Dashboard') - Amazon LEO Internet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
         body { margin:0; background:#f4f6fb; color:#212529; font-size:16px; font-weight:400; line-height:24px; overflow-x:hidden; }
         .dashboard-shell { min-height:100vh; display:grid; grid-template-columns:250px minmax(0,1fr); }
         .dashboard-sidebar { background:linear-gradient(180deg,#f8fafc 0%,#ffffff 70%); border-right:1px solid #e2e8f0; padding:16px 10px 24px; height:100vh; overflow-y:auto; position:sticky; top:0; box-shadow:8px 0 30px rgba(15,23,42,.08); }
-        .dashboard-brand { display:flex; align-items:center; justify-content:center; gap:8px; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:12px 14px; min-height:auto; font-size:19.2px; line-height:24px; font-weight:600; color:#0f172a; text-decoration:none; box-shadow:0 12px 20px rgba(15,23,42,.08); margin:12px 10px 18px; }
+        .dashboard-brand { display:flex; align-items:center; justify-content:center; gap:8px; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:12px 14px; min-height:auto; font-size:17px; line-height:22px; font-weight:600; color:#0f172a; text-align:center; text-decoration:none; box-shadow:0 12px 20px rgba(15,23,42,.08); margin:12px 10px 18px; }
         .dashboard-brand-mark { display:none; }
         .sidebar-section { margin-top:24px; }
         .sidebar-heading { color:#94a3b8; font-size:.7rem; font-weight:400; letter-spacing:.18em; text-transform:uppercase; margin:14px 12px 6px; }
@@ -78,9 +78,9 @@
 @php($user = auth()->user())
 <div class="dashboard-shell">
     <aside class="dashboard-sidebar">
-        <a class="dashboard-brand" href="{{ route('dashboard') }}">
+        <a class="dashboard-brand" href="{{ route('home') }}">
             <span class="dashboard-brand-mark">LA</span>
-            <span>Lasafi</span>
+            <span>Amazon LEO Internet</span>
         </a>
 
         <div class="sidebar-section">
@@ -171,7 +171,7 @@
     </aside>
 
     <main class="dashboard-main">
-        @unless(trim($__env->yieldContent('dashboard-title', 'Dashboard')) === '' && trim($__env->yieldContent('dashboard-subtitle', 'Manage Lasafi operations from one place.')) === '' && trim($__env->yieldContent('dashboard-actions')) === '')
+        @unless(trim($__env->yieldContent('dashboard-title', 'Dashboard')) === '' && trim($__env->yieldContent('dashboard-subtitle', 'Manage Amazon LEO Internet operations from one place.')) === '' && trim($__env->yieldContent('dashboard-actions')) === '')
             <div class="dashboard-topbar">
                 <div>
                     @hasSection('dashboard-title')
@@ -182,7 +182,7 @@
                     @hasSection('dashboard-subtitle')
                         @if(trim($__env->yieldContent('dashboard-subtitle')) !== '')<p class="dashboard-subtitle">@yield('dashboard-subtitle')</p>@endif
                     @else
-                        <p class="dashboard-subtitle">Manage Lasafi operations from one place.</p>
+                        <p class="dashboard-subtitle">Manage Amazon LEO Internet operations from one place.</p>
                     @endif
                 </div>
                 @yield('dashboard-actions')
