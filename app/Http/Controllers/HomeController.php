@@ -73,6 +73,8 @@ class HomeController extends Controller
 
         return Str::startsWith($image, ['http://', 'https://', '//'])
             ? $image
-            : asset('storage/'.ltrim($image, '/'));
+            : asset(Str::startsWith($image, ['/storage/', 'storage/'])
+                ? ltrim($image, '/')
+                : 'storage/'.ltrim($image, '/'));
     }
 }

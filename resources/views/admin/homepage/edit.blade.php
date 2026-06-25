@@ -4,10 +4,32 @@
 @section('dashboard-subtitle', '')
 @section('content')
 @php
+    $homepageImageUrl = function (?string $image): string {
+        $image = trim((string) $image);
+
+        if ($image === '') {
+            return 'https://via.placeholder.com/1280x720?text=Homepage+Image';
+        }
+
+        if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://') || str_starts_with($image, '//')) {
+            return $image;
+        }
+
+        if (str_starts_with($image, '/storage/')) {
+            return asset(ltrim($image, '/'));
+        }
+
+        if (str_starts_with($image, 'storage/')) {
+            return asset($image);
+        }
+
+        return asset('storage/'.ltrim($image, '/'));
+    };
+
     $currentHeroImage = $content['home_hero_image'];
-    $currentHeroImageUrl = str_starts_with($currentHeroImage, 'http') ? $currentHeroImage : asset('storage/'.$currentHeroImage);
+    $currentHeroImageUrl = $homepageImageUrl($currentHeroImage);
     $currentFeatureImage = $content['home_feature_image'];
-    $currentFeatureImageUrl = str_starts_with($currentFeatureImage, 'http') ? $currentFeatureImage : asset('storage/'.$currentFeatureImage);
+    $currentFeatureImageUrl = $homepageImageUrl($currentFeatureImage);
 @endphp
 
 <div class="adminlte-content-wrapper">
@@ -70,7 +92,7 @@
                                 <div class="form-group">
                                     <label for="home_hero_image">Hero Image (1280 x 720)</label>
                                     <input type="file" class="form-control" name="home_hero_image" id="home_hero_image" accept="image/*">
-                                    <input type="hidden" name="home_hero_image_url" value="{{ old('home_hero_image_url', str_starts_with($content['home_hero_image'], 'http') ? $content['home_hero_image'] : '') }}">
+                                    <input type="text" class="form-control mt-2" name="home_hero_image_url" value="{{ old('home_hero_image_url', str_starts_with($content['home_hero_image'], 'http') ? $content['home_hero_image'] : '') }}" placeholder="Or paste an image URL">
                                     <img src="{{ $currentHeroImageUrl }}" alt="Current hero image" class="homepage-content-image">
                                 </div>
 
