@@ -51,8 +51,8 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
 .sii-price-block{margin:0 0 92px!important}
 .sii-price-label{font-size:16px!important;line-height:1!important;font-weight:700!important;color:rgba(255,255,255,.72)!important;margin:0 0 16px!important}
 .sii-price-row{display:flex!important;align-items:flex-end!important;gap:7px!important}
-.sii-price{font-size:78px!important;line-height:.82!important;font-weight:700!important;color:#fff!important;letter-spacing:0!important}
-.sii-price-unit{font-size:34px!important;line-height:1!important;font-weight:400!important;color:rgba(255,255,255,.82)!important}
+.sii-price{font-size:14px!important;line-height:1.2!important;font-weight:700!important;color:#fff!important;letter-spacing:0!important}
+.sii-price-unit{font-size:14px!important;line-height:1.2!important;font-weight:400!important;color:rgba(255,255,255,.82)!important}
 .sii-actions{display:flex!important;flex-wrap:wrap!important;gap:36px!important;align-items:center!important}
 .sii-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:196px!important;min-height:54px!important;border-radius:4px!important;padding:0 20px!important;font-family:Arial,Helvetica,sans-serif!important;font-size:18px!important;line-height:1!important;font-weight:700!important;text-align:center!important;text-decoration:none!important;border:0!important}
 .sii-btn-primary{background:#fff!important;color:#111!important}
@@ -138,8 +138,8 @@ body{font-family:Arial,Helvetica,sans-serif!important;background:#05070b!importa
 @media(max-width:600px){
     .sii-hero{min-height:720px!important}
     .sii-hero h1{font-size:clamp(34px,10vw,40px)!important}
-    .sii-price{font-size:66px!important}
-    .sii-price-unit{font-size:28px!important}
+    .sii-price{font-size:14px!important}
+    .sii-price-unit{font-size:14px!important}
     .sii-actions{flex-wrap:wrap!important}
     .sii-btn{min-width:100%!important}
 }
