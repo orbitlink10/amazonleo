@@ -11,8 +11,12 @@ class Product extends Model
         'name',
         'slug',
         'price',
+        'marked_price',
+        'quantity',
+        'subcategory',
         'google_merchant',
         'image',
+        'meta_description',
         'description',
     ];
 
@@ -20,6 +24,8 @@ class Product extends Model
     {
         return [
             'price' => 'decimal:2',
+            'marked_price' => 'decimal:2',
+            'quantity' => 'integer',
             'google_merchant' => 'boolean',
         ];
     }

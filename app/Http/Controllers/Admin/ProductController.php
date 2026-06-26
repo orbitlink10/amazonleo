@@ -10,15 +10,6 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    private array $productCategorySlugs = [
-        'where-to-buy-starlink-in-kenya',
-        'isp-billing-software',
-        'starlink-extension',
-        'starlink-accesories',
-        'starlink-kenya-packages',
-        'starlink-kenya-price',
-    ];
-
     public function index(Request $request)
     {
         $products = Product::with('category')
@@ -41,7 +32,11 @@ class ProductController extends Controller
     {
         return view('admin.products.form', [
             'product' => new Product(),
-            'categories' => Category::whereIn('slug', $this->productCategorySlugs)->where('is_active', true)->orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get(),
+            'subcategories' => Product::whereNotNull('subcategory')
+                ->distinct()
+                ->orderBy('subcategory')
+                ->pluck('subcategory'),
         ]);
     }
 
@@ -49,6 +44,11 @@ class ProductController extends Controller
     {
         $data = $this->validated($request);
         $data['slug'] = Str::slug($data['slug'] ?: $data['name']);
+        $data['marked_price'] = $data['marked_price'] ?: 0;
+        $data['quantity'] = $data['quantity'] ?: 0;
+        $data['subcategory'] = $data['subcategory'] ?: null;
+        $data['meta_description'] = $data['meta_description'] ?: null;
+        $data['description'] = $data['description'] ?: null;
         $data['google_merchant'] = $request->boolean('google_merchant');
 
         if ($request->hasFile('image_file')) {
@@ -64,7 +64,11 @@ class ProductController extends Controller
     {
         return view('admin.products.form', [
             'product' => $product,
-            'categories' => Category::whereIn('slug', $this->productCategorySlugs)->where('is_active', true)->orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get(),
+            'subcategories' => Product::whereNotNull('subcategory')
+                ->distinct()
+                ->orderBy('subcategory')
+                ->pluck('subcategory'),
         ]);
     }
 
@@ -72,6 +76,11 @@ class ProductController extends Controller
     {
         $data = $this->validated($request, $product);
         $data['slug'] = Str::slug($data['slug'] ?: $data['name']);
+        $data['marked_price'] = $data['marked_price'] ?: 0;
+        $data['quantity'] = $data['quantity'] ?: 0;
+        $data['subcategory'] = $data['subcategory'] ?: null;
+        $data['meta_description'] = $data['meta_description'] ?: null;
+        $data['description'] = $data['description'] ?: null;
         $data['google_merchant'] = $request->boolean('google_merchant');
 
         if ($request->hasFile('image_file')) {
@@ -99,9 +108,13 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:products,slug,'.$id],
             'price' => ['required', 'numeric', 'min:0'],
+            'marked_price' => ['nullable', 'numeric', 'min:0'],
+            'quantity' => ['nullable', 'integer', 'min:0'],
+            'subcategory' => ['nullable', 'string', 'max:255'],
             'google_merchant' => ['nullable', 'boolean'],
             'image' => ['nullable', 'url', 'max:2048'],
             'image_file' => ['nullable', 'image', 'max:4096'],
+            'meta_description' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
         ]);
     }

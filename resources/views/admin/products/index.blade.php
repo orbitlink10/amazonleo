@@ -37,6 +37,7 @@
                         <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Name</th>
                         <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Slug</th>
                         <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Price (KES)</th>
+                        <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Quantity</th>
                         <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Google Merchant</th>
                         <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Category</th>
                         <th class="text-uppercase text-muted" style="letter-spacing:.16em;">Actions</th>
@@ -50,6 +51,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->slug }}</td>
                             <td>{{ number_format((float) $product->price, 2) }}<br><span class="text-muted">( {{ (float) $product->price > 0 ? 'has price' : 'no price' }} )</span></td>
+                            <td>{{ $product->quantity }}</td>
                             <td>{{ $product->google_merchant ? 'Yes' : 'No' }}</td>
                             <td>{{ $product->category->name ?? '-' }}</td>
                             <td>
@@ -64,7 +66,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="8" class="text-center text-muted py-4">No products found.</td></tr>
+                        <tr><td colspan="9" class="text-center text-muted py-4">No products found.</td></tr>
                     @endforelse
                 </tbody>
             </table>

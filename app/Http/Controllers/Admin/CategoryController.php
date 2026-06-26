@@ -9,19 +9,10 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    private array $productCategorySlugs = [
-        'where-to-buy-starlink-in-kenya',
-        'isp-billing-software',
-        'starlink-extension',
-        'starlink-accesories',
-        'starlink-kenya-packages',
-        'starlink-kenya-price',
-    ];
-
     public function index()
     {
         return view('admin.categories.index', [
-            'categories' => Category::whereIn('slug', $this->productCategorySlugs)->orderBy('id')->paginate(20),
+            'categories' => Category::latest()->paginate(20),
         ]);
     }
 
