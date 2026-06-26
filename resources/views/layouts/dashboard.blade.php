@@ -111,9 +111,13 @@
                     <span class="sidebar-icon"><i class="bi bi-list"></i></span>
                     <span>Menu</span>
                 </a>
-                <a class="sidebar-link" href="{{ route('home') }}#services">
+                <a class="sidebar-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                     <span class="sidebar-icon"><i class="bi bi-grid-3x3-gap"></i></span>
                     <span>Categories</span>
+                </a>
+                <a class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" href="{{ route('admin.products.index') }}">
+                    <span class="sidebar-icon"><i class="bi bi-box-seam-fill"></i></span>
+                    <span>Products</span>
                 </a>
                 <a class="sidebar-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
                     <span class="sidebar-icon"><i class="bi bi-cart3"></i></span>
@@ -151,7 +155,7 @@
                     <span class="sidebar-icon"><i class="bi bi-file-earmark-text"></i></span>
                     <span>Homepage Content</span>
                 </a>
-                <a class="sidebar-link" href="{{ route('home') }}#testimonials">
+                <a class="sidebar-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}" href="{{ route('admin.testimonials.index') }}">
                     <span class="sidebar-icon"><i class="bi bi-chat-square-text-fill"></i></span>
                     <span>Testimonials</span>
                 </a>
