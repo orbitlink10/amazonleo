@@ -123,6 +123,14 @@
                     <span class="sidebar-icon"><i class="bi bi-cart3"></i></span>
                     <span>Bookings</span>
                 </a>
+                <a class="sidebar-link {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">
+                    <span class="sidebar-icon"><i class="bi bi-person-lines-fill"></i></span>
+                    <span>Customers</span>
+                </a>
+                <a class="sidebar-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}" href="{{ route('admin.orders.index') }}">
+                    <span class="sidebar-icon"><i class="bi bi-bag-check-fill"></i></span>
+                    <span>Orders</span>
+                </a>
                 <a class="sidebar-link {{ request()->routeIs('admin.providers.*') ? 'active' : '' }}" href="{{ route('admin.providers.index') }}">
                     <span class="sidebar-icon"><i class="bi bi-people-fill"></i></span>
                     <span>Providers</span>

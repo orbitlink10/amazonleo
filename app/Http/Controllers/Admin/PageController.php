@@ -162,7 +162,7 @@ class PageController extends Controller
             $page['type'] = $page['type'] ?? 'Post';
 
             return $page;
-        })->values()->all();
+        })->sortByDesc(fn ($page) => (int) ($page['id'] ?? 0))->values()->all();
 
         if ($seed) {
             $this->save($pages);

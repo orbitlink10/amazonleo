@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HomepageContentController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -63,7 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin,dispatcher')->name('admin.')->group(function () {
         Route::resource('categories', CategoryController::class)->except(['show']);
         Route::resource('products', ProductController::class)->except(['show']);
-        Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+        Route::resource('testimonials', TestimonialController::class)->except(['show']);
+        Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('/pages', [PageController::class, 'index'])->name('pages');
         Route::get('/new-post', [PageController::class, 'create'])->name('pages.create');
         Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
@@ -78,5 +82,5 @@ Route::get('/page-images/{path}', [PageController::class, 'image'])
     ->where('path', '.*')
     ->name('pages.image');
 Route::get('/{slug}', [PageController::class, 'preview'])
-    ->where('slug', '^(?!admin|bookings|categories|dashboard|forgot-password|login|logout|new-post|page|pages|password|products|profile|register|storage|testimonials).+')
+    ->where('slug', '^(?!admin|bookings|categories|customers|dashboard|forgot-password|login|logout|new-post|orders|page|pages|password|products|profile|register|storage|testimonials).+')
     ->name('pages.preview');
