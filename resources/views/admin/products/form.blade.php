@@ -7,10 +7,19 @@
 @section('content')
 @php
     $imageUrl = $product->image
-        ? (str_starts_with($product->image, 'http') || str_starts_with($product->image, '//') ? $product->image : asset('storage/'.ltrim($product->image, '/')))
+        ? (str_starts_with($product->image, 'http') || str_starts_with($product->image, '//') ? $product->image : route('media.image', ['path' => ltrim($product->image, '/')]))
         : null;
 @endphp
-<div class="px-3 pb-4">
+<style>
+    .product-form-screen, .product-form-screen .form-control, .product-form-screen .form-select, .product-form-screen .btn { font-size:15px; }
+    .product-form-screen .form-label { font-size:15px; margin-bottom:6px; }
+    .local-editor { border:1px solid #dee2e6; border-radius:12px; overflow:hidden; background:#fff; }
+    .local-editor-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:10px 12px; border-bottom:1px solid #e5e7eb; background:#f8fafc; }
+    .local-editor-toolbar select, .local-editor-toolbar button { height:34px; border:1px solid #d8dee8; border-radius:8px; background:#fff; color:#334155; font-size:14px; }
+    .local-editor-toolbar button { width:36px; display:grid; place-items:center; }
+    .local-editor-area { min-height:320px; padding:16px; outline:0; font-size:15px; line-height:1.6; }
+</style>
+<div class="px-3 pb-4 product-form-screen">
     <div class="card dashboard-content-card">
         <div class="card-body">
             <form method="post" action="{{ $product->exists ? route('admin.products.update', $product) : route('admin.products.store') }}" enctype="multipart/form-data">
@@ -57,7 +66,28 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label fw-semibold">Description</label>
-                        <textarea class="form-control js-product-editor" name="description" rows="12">{{ old('description', $product->description) }}</textarea>
+                        <textarea class="form-control js-editor-source d-none" name="description">{{ old('description', $product->description) }}</textarea>
+                        <div class="local-editor" data-editor>
+                            <div class="local-editor-toolbar">
+                                <button type="button" data-cmd="undo" title="Undo"><i class="bi bi-arrow-counterclockwise"></i></button>
+                                <button type="button" data-cmd="redo" title="Redo"><i class="bi bi-arrow-clockwise"></i></button>
+                                <select data-block title="Text style">
+                                    <option value="p">Paragraph</option>
+                                    <option value="h1">Header 1</option>
+                                    <option value="h2">Header 2</option>
+                                    <option value="h3">Header 3</option>
+                                    <option value="h4">Header 4</option>
+                                </select>
+                                <button type="button" data-cmd="bold" title="Bold"><i class="bi bi-type-bold"></i></button>
+                                <button type="button" data-cmd="italic" title="Italic"><i class="bi bi-type-italic"></i></button>
+                                <button type="button" data-cmd="justifyLeft" title="Align left"><i class="bi bi-text-left"></i></button>
+                                <button type="button" data-cmd="justifyCenter" title="Align center"><i class="bi bi-text-center"></i></button>
+                                <button type="button" data-cmd="justifyRight" title="Align right"><i class="bi bi-text-right"></i></button>
+                                <button type="button" data-cmd="insertUnorderedList" title="Bullet list"><i class="bi bi-list-ul"></i></button>
+                                <button type="button" data-link title="Link"><i class="bi bi-link-45deg"></i></button>
+                            </div>
+                            <div class="local-editor-area" contenteditable="true">{!! old('description', $product->description) !!}</div>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label class="form-label">Slug</label>
@@ -79,7 +109,7 @@
                     </div>
                     @if($imageUrl)
                         <div class="col-12">
-                            <img class="img-thumbnail" src="{{ $imageUrl }}" alt="{{ $product->name }}" style="width:180px;height:120px;object-fit:contain;">
+                            <img class="img-thumbnail" src="{{ $imageUrl }}" alt="{{ $product->name }}" style="width:180px;height:120px;object-fit:contain;" onerror="this.style.display='none';">
                         </div>
                     @endif
                 </div>
@@ -92,23 +122,38 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        if (!window.tinymce) {
-            return;
-        }
+    document.querySelectorAll('[data-editor]').forEach(function (editor) {
+        const source = editor.previousElementSibling;
+        const area = editor.querySelector('.local-editor-area');
+        const block = editor.querySelector('[data-block]');
+        const sync = () => { source.value = area.innerHTML.trim(); };
 
-        tinymce.init({
-            selector: '.js-product-editor',
-            height: 380,
-            menubar: 'file edit view insert format tools table',
-            plugins: 'link image media code fullscreen lists table',
-            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image media | code fullscreen',
-            block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3; Header 4=h4',
-            branding: false,
-            promotion: false
+        editor.querySelectorAll('[data-cmd]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                area.focus();
+                document.execCommand(button.dataset.cmd, false, null);
+                sync();
+            });
         });
+
+        block.addEventListener('change', function () {
+            area.focus();
+            document.execCommand('formatBlock', false, block.value);
+            sync();
+        });
+
+        editor.querySelector('[data-link]').addEventListener('click', function () {
+            const url = window.prompt('Enter URL');
+            if (url) {
+                area.focus();
+                document.execCommand('createLink', false, url);
+                sync();
+            }
+        });
+
+        area.addEventListener('input', sync);
+        area.closest('form').addEventListener('submit', sync);
     });
 </script>
 @endpush

@@ -16,16 +16,25 @@
 
         return str_starts_with($image, 'http') || str_starts_with($image, '//')
             ? $image
-            : asset('storage/'.ltrim($image, '/'));
+            : route('media.image', ['path' => ltrim($image, '/')]);
     };
 @endphp
-<div class="px-3 pb-4">
+<style>
+    .products-screen .card-title { font-size:18px; line-height:1.3; }
+    .products-screen .table { font-size:14px; line-height:1.45; }
+    .products-screen .table th { font-size:12px; letter-spacing:.12em !important; white-space:nowrap; }
+    .products-screen .table td { vertical-align:middle; }
+    .products-screen .product-thumb { width:96px; height:68px; object-fit:contain; display:block; }
+    .products-screen .product-search { max-width:300px; height:42px; font-size:14px; }
+    .products-screen .product-search-btn { height:42px; font-size:14px; }
+</style>
+<div class="px-3 pb-4 products-screen">
     <section class="card dashboard-content-card overflow-hidden">
         <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-3">
             <h2 class="card-title mb-0">Product List</h2>
             <form class="d-flex gap-2" method="get" action="{{ route('admin.products.index') }}">
-                <input class="form-control rounded-pill" name="search" value="{{ $search }}" placeholder="Search by product name...">
-                <button class="btn btn-primary rounded-pill fw-semibold px-4" type="submit"><i class="bi bi-search"></i> Search</button>
+                <input class="form-control rounded-pill product-search" name="search" value="{{ $search }}" placeholder="Search by product name...">
+                <button class="btn btn-primary rounded-pill fw-semibold px-4 product-search-btn" type="submit"><i class="bi bi-search"></i> Search</button>
             </form>
         </div>
         <div class="table-responsive">
@@ -47,7 +56,7 @@
                     @forelse($products as $product)
                         <tr>
                             <td>{{ $loop->iteration + ($products->currentPage() - 1) * $products->perPage() }}</td>
-                            <td><img src="{{ $imageUrl($product->image) }}" alt="{{ $product->name }}" style="width:150px;height:96px;object-fit:contain;"></td>
+                            <td><img class="product-thumb" src="{{ $imageUrl($product->image) }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/120x80?text=No+Image';"></td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->slug }}</td>
                             <td>{{ number_format((float) $product->price, 2) }}<br><span class="text-muted">( {{ (float) $product->price > 0 ? 'has price' : 'no price' }} )</span></td>

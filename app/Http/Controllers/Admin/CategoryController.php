@@ -75,6 +75,7 @@ class CategoryController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:categories,slug,'.$id],
             'description' => ['nullable', 'string'],
+            'meta_description' => ['nullable', 'string'],
             'photo' => ['nullable', 'image', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
         ]);

@@ -19,6 +19,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReviewController;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -81,6 +82,15 @@ Route::get('/page/{slug}', fn (string $slug) => redirect('/'.$slug, 301));
 Route::get('/page-images/{path}', [PageController::class, 'image'])
     ->where('path', '.*')
     ->name('pages.image');
+Route::get('/uploaded-images/{path}', function (string $path) {
+    $path = ltrim(rawurldecode($path), '/');
+
+    abort_if($path === '' || str_contains($path, '..') || ! Storage::disk('public')->exists($path), 404);
+
+    return response(Storage::disk('public')->get($path), 200)
+        ->header('Content-Type', Storage::disk('public')->mimeType($path) ?: 'application/octet-stream')
+        ->header('Cache-Control', 'public, max-age=604800');
+})->where('path', '.*')->name('media.image');
 Route::get('/{slug}', [PageController::class, 'preview'])
     ->where('slug', '^(?!admin|bookings|categories|customers|dashboard|forgot-password|login|logout|new-post|orders|page|pages|password|products|profile|register|storage|testimonials).+')
     ->name('pages.preview');

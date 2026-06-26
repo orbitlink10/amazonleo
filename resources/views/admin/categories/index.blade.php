@@ -16,7 +16,7 @@
 
         return str_starts_with($image, 'http') || str_starts_with($image, '//')
             ? $image
-            : asset('storage/'.ltrim($image, '/'));
+            : route('media.image', ['path' => ltrim($image, '/')]);
     };
 @endphp
 <div class="px-3 pb-4">
@@ -38,7 +38,7 @@
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
-                            <td><img class="img-thumbnail" src="{{ $imageUrl($category->icon) }}" alt="{{ $category->name }}" style="width:100px;height:64px;object-fit:cover;"></td>
+                            <td><img class="img-thumbnail" src="{{ $imageUrl($category->icon) }}" alt="{{ $category->name }}" style="width:100px;height:64px;object-fit:cover;" onerror="this.src='https://via.placeholder.com/140x90?text=No+Photo';"></td>
                             <td>
                                 <div class="d-flex flex-wrap gap-1">
                                     <a class="btn btn-sm btn-info text-white rounded-pill px-3" href="{{ route('admin.products.index', ['search' => $category->name]) }}">Show</a>
